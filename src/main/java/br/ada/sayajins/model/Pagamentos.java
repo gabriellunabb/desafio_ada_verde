@@ -66,9 +66,9 @@ public class Pagamentos {
                 .concat(";")
                 .concat(this.getTipoPagamentoEnum().name())
                 .concat(";")
-                .concat(this.dtVencto.toString())
+                .concat(this.dtVencto.toString().replaceAll("-","" ))
                 .concat(";")
-                .concat(this.getValorFormatado())
+                .concat(String.valueof(this.valor.doubleValue()))
                 ;
     }
 }
