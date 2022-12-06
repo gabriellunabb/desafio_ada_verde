@@ -1,6 +1,5 @@
 package br.ada.sayajins;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +11,6 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, Exception {
 
         try {
-            File novoArquivo = new File("src\\main\\resources\\arquivoCriado.csv");
-
             PagamentosDao pDao = new PagamentosDao();
             List<Pagamentos> pagamentos = new ArrayList<Pagamentos>();
 
@@ -23,9 +20,10 @@ public class Main {
             PagamentosService.alterarListaAdiantado(pagamentos);
 
             pagamentos.stream().forEach(System.out::println);
-            pDao.criarArquivo(novoArquivo, pagamentos);
+            pDao.criarArquivosSeparados(pagamentos);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
 }

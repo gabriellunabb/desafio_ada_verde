@@ -5,11 +5,14 @@ import java.io.File;
 import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
 import br.ada.sayajins.model.Pagamentos;
 import br.ada.sayajins.model.PagamentosFactory;
+import br.ada.sayajins.model.TipoPagamentoEnum;
+import br.ada.sayajins.service.PagamentosService;
 
 public class PagamentosDao {
 
@@ -44,7 +47,7 @@ public class PagamentosDao {
         System.out.println(path);
     }
 
-    public void criarArquivo(File file, List<Pagamentos> pagamentos) {
+    private void criarArquivo(File file, List<Pagamentos> pagamentos) {
 
         String[] conteudo = pagamentos.toString()
                 .substring(1, pagamentos.toString().length() - 1).split(", ");
@@ -60,6 +63,18 @@ public class PagamentosDao {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public void criarArquivosSeparados(List<Pagamentos> pagamentos) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for (TipoPagamentoEnum values : TipoPagamentoEnum.values()) {
+            String fileName = "src/main/resources/PAGAMENTOS_" + values.name() + "_" + LocalDate.now().format(formatter)
+                    + ".csv";
+            File novoArquivo = new File(fileName);
+            List<Pagamentos> lista = PagamentosService.retornaPagamentosPorTipo(pagamentos, values);
+            criarArquivo(novoArquivo, lista);
         }
     }
 

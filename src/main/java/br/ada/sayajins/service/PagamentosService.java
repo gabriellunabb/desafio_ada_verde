@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import br.ada.sayajins.model.AlteracoesValor;
 import br.ada.sayajins.model.Pagamentos;
+import br.ada.sayajins.model.TipoPagamentoEnum;
 
 public class PagamentosService {
 
@@ -44,4 +45,9 @@ public class PagamentosService {
         return (LocalDate.now().until(p.getDtVencto()).getDays());
     }
 
+    public static List<Pagamentos> retornaPagamentosPorTipo(List<Pagamentos> lista, TipoPagamentoEnum tipoPagamento) {
+        return lista.stream()
+                .filter(p -> p.getTipoPagamentoEnum().equals(tipoPagamento))
+                .collect(Collectors.toList());
+    }
 }
