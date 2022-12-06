@@ -2,6 +2,7 @@ package br.ada.sayajins.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import br.ada.sayajins.model.AlteracoesValor;
 import br.ada.sayajins.model.Pagamentos;
@@ -20,7 +21,7 @@ public class PagamentosService {
                             .multiply(p.getValor()));
                     return p;
                 })
-                .toList();
+                .collect(Collectors.toList());
     };
 
     public static List<Pagamentos> alterarListaAdiantado(List<Pagamentos> lista) {
@@ -32,7 +33,7 @@ public class PagamentosService {
                             .multiply(p.getValor()));
                     return p;
                 })
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private static Integer getMesesAtraso(Pagamentos p) {
