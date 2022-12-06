@@ -63,11 +63,11 @@ public class Pagamentos {
     @Override
     public String toString() {
         return this.nome
-                .concat("   |   ")
+                .concat(";")
                 .concat(this.dtVencto.toString())
-                .concat("   |   ")
+                .concat(";")
                 .concat(this.getValorFormatado())
-                .concat("   |   ")
+                .concat(";")
                 .concat(this.getTipoPagamentoEnum().name());
     }
 }

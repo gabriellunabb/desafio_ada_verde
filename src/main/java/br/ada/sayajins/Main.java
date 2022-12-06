@@ -1,10 +1,7 @@
 package br.ada.sayajins;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import br.ada.sayajins.dao.PagamentosDao;
@@ -24,25 +21,11 @@ public class Main {
             PagamentosService.alterarListaAdiantado(pagamentos);
 
             pagamentos.stream().forEach(System.out::println);
+
+            File novoArquivo = new File("src\\main\\resources\\arquivoCriado.csv");
+            pDao.criarArquivo(novoArquivo, pagamentos);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-        }
-    }
-
-    private static void exibirArquivo(InputStream is) throws FileNotFoundException {
-        StringBuilder result = new StringBuilder();
-
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-            String line;
-
-            while (br.readLine() != null) {
-                line = br.readLine();
-                result.append(line).append("\n");
-            }
-
-            System.out.println(result.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }

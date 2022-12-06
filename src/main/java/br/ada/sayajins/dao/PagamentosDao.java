@@ -1,6 +1,8 @@
 package br.ada.sayajins.dao;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -45,6 +47,25 @@ public class PagamentosDao {
         }
 
         System.out.println(path);
+    }
+
+    public void criarArquivo(File file, List<Pagamentos> pagamentos) {
+
+        String[] conteudo = pagamentos.toString()
+                .substring(1, pagamentos.toString().length() - 2).split(", ");
+
+        try {
+            BufferedWriter arquivo = new BufferedWriter(new FileWriter(file));
+
+            for (String string : conteudo) {
+                arquivo.write(string + "\n");
+            }
+
+            arquivo.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
