@@ -17,11 +17,7 @@ public class PagamentosDao {
     public void lerArquivo(List<Pagamentos> pagamentos) {
         try {
             File arquivo = new File("src/main/resources/pagamentos.csv");
-
             checarArquivo(arquivo.toPath());
-            Path arquivoNio = Paths.get("src/main/resources/pagamentos.csv");
-            checarArquivo(arquivoNio.toAbsolutePath());
-
             Scanner scanner = new Scanner(arquivo);
             scanner.nextLine();
 
