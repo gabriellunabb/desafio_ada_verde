@@ -47,7 +47,7 @@ public class PagamentosDao {
     public void criarArquivo(File file, List<Pagamentos> pagamentos) {
 
         String[] conteudo = pagamentos.toString()
-                .substring(1, pagamentos.toString().length() - 2).split(", ");
+                .substring(1, pagamentos.toString().length() - 1).split(", ");
 
         try {
             BufferedWriter arquivo = new BufferedWriter(new FileWriter(file));

@@ -64,10 +64,11 @@ public class Pagamentos {
     public String toString() {
         return this.nome
                 .concat(";")
+                .concat(this.getTipoPagamentoEnum().name())
+                .concat(";")
                 .concat(this.dtVencto.toString())
                 .concat(";")
                 .concat(this.getValorFormatado())
-                .concat(";")
-                .concat(this.getTipoPagamentoEnum().name());
+                ;
     }
 }
