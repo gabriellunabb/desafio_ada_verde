@@ -14,15 +14,28 @@ public class PagamentosService {
             .map((p) -> new Pagamentos(
                 p.getNome(),
                 p.getDtVencto(),
-                AlteracoesValor.acrescimo(p.getTipoPagamentoEnum()).pow(Long.valueOf(p.getDtVencto().until(LocalDate.now()).toTotalMonths()).intValue())
-                    .multiply(p.getValor())
-                    .doubleValue(),
+                AlteracoesValor.acrescimo(p.getTipoPagamentoEnum()).pow(getMesesAtraso(p)).multiply(p.getValor()).doubleValue(),
                 p.getTipoPagamentoEnum()))
-            .toList();  
+            .toList();
     };
 
     public static List<Pagamentos> alterarListaAdiantado(List<Pagamentos> lista){
-        return lista;
+        return lista.stream()
+            .filter((p) -> p.getDtVencto().isAfter(LocalDate.now()))
+            .map((p) -> new Pagamentos(
+                p.getNome(),
+                p.getDtVencto(),
+                AlteracoesValor.decrescimo(p.getTipoPagamentoEnum()).pow(getDiasAdiantados(p)).multiply(p.getValor()).doubleValue(),
+                p.getTipoPagamentoEnum()))
+            .toList();
+    }
+
+    private static Integer getMesesAtraso(Pagamentos p){
+        return Long.valueOf(p.getDtVencto().until(LocalDate.now()).toTotalMonths()).intValue();
+    }
+
+    private static Integer getDiasAdiantados(Pagamentos p){
+        return Long.valueOf(p.getDtVencto().until(LocalDate.now()).toTotalMonths()).intValue();
     }
     
 }
