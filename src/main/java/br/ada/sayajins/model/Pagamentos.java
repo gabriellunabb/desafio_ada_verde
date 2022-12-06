@@ -51,7 +51,7 @@ public class Pagamentos {
         setNome(s);
     }
 
-    public Pagamentos(String s, LocalDate dateVencto, double valor, TipoPagamentoEnum tipoPagamentoEnum){
+    public Pagamentos(String s, TipoPagamentoEnum tipoPagamentoEnum,LocalDate dateVencto, double valor){
         this.valor=BigDecimal.valueOf(valor);
         this.nome=s;
         this.dtVencto=dateVencto;
