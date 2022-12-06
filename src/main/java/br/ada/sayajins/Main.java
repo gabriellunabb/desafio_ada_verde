@@ -12,6 +12,8 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, Exception {
 
         try {
+            File novoArquivo = new File("src\\main\\resources\\arquivoCriado.csv");
+
             PagamentosDao pDao = new PagamentosDao();
             List<Pagamentos> pagamentos = new ArrayList<Pagamentos>();
 
@@ -21,8 +23,6 @@ public class Main {
             PagamentosService.alterarListaAdiantado(pagamentos);
 
             pagamentos.stream().forEach(System.out::println);
-
-            File novoArquivo = new File("src\\main\\resources\\arquivoCriado.csv");
             pDao.criarArquivo(novoArquivo, pagamentos);
         } catch (Exception e) {
             System.out.println(e.getMessage());
