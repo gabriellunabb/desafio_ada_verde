@@ -6,9 +6,11 @@ import java.time.LocalDate;
 import java.util.Locale;
 
 public class Pagamentos {
-    private String nome;
 
+    private String nome;
     private LocalDate dtVencto;
+    private BigDecimal valor;
+    private TipoPagamentoEnum tipoPagamentoEnum;
 
     public TipoPagamentoEnum getTipoPagamentoEnum() {
         return tipoPagamentoEnum;
@@ -17,10 +19,6 @@ public class Pagamentos {
     public void setTipoPagamentoEnum(TipoPagamentoEnum tipoPagamentoEnum) {
         this.tipoPagamentoEnum = tipoPagamentoEnum;
     }
-
-    private BigDecimal valor;
-
-    private TipoPagamentoEnum tipoPagamentoEnum;
 
     public LocalDate getDtVencto() {
         return dtVencto;
@@ -46,31 +44,30 @@ public class Pagamentos {
         this.nome = v;
     }
 
-
-    public Pagamentos(String s){
+    public Pagamentos(String s) {
         setNome(s);
     }
 
-    public Pagamentos(String s, TipoPagamentoEnum tipoPagamentoEnum,LocalDate dateVencto, double valor){
-        this.valor=BigDecimal.valueOf(valor);
-        this.nome=s;
-        this.dtVencto=dateVencto;
-        this.tipoPagamentoEnum=tipoPagamentoEnum;
+    public Pagamentos(String s, TipoPagamentoEnum tipoPagamentoEnum, LocalDate dateVencto, BigDecimal valor) {
+        this.valor = valor;
+        this.nome = s;
+        this.dtVencto = dateVencto;
+        this.tipoPagamentoEnum = tipoPagamentoEnum;
     }
 
-
-    public String getValorFormatado(){
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
-        return  formatter.format(this.valor.doubleValue());
+    public String getValorFormatado() {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return formatter.format(this.valor.doubleValue());
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.nome
-                   .concat("   |   ")
-                   .concat(this.dtVencto.toString())
-                   .concat("   |   ")
-                   .concat(this.getValorFormatado())
-                   .concat("   |   ")
-                   .concat(this.getTipoPagamentoEnum().name());
+                .concat("   |   ")
+                .concat(this.dtVencto.toString())
+                .concat("   |   ")
+                .concat(this.getValorFormatado())
+                .concat("   |   ")
+                .concat(this.getTipoPagamentoEnum().name());
     }
 }
