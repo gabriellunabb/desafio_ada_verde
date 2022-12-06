@@ -1,57 +1,32 @@
 package br.ada.sayajins;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
+import br.ada.sayajins.dao.PagamentosDao;
 import br.ada.sayajins.model.Pagamentos;
-import br.ada.sayajins.model.PagamentosFactory;
+import br.ada.sayajins.service.PagamentosService;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, Exception {
 
         try {
-            File arquivo = new File("src/main/resources/pagamentos.csv");
-            List<String> lista = new ArrayList<>();
-            List<Pagamentos> pagamentos = new ArrayList<>();
-            checarArquivo(arquivo.toPath());
-            Path arquivoNio = Paths.get("src/main/resources/pagamentos.csv");
-            checarArquivo(arquivoNio.toAbsolutePath());
+            PagamentosDao pDao = new PagamentosDao();
+            List<Pagamentos> pagamentos = new ArrayList<Pagamentos>();
 
-            Scanner scanner = new Scanner(arquivo);
-            scanner.nextLine();
+            pDao.lerArquivo(pagamentos);
 
-            while (scanner.hasNext()) {
-                String[] line = scanner.nextLine().split(";");
-                PagamentosFactory factory = new PagamentosFactory(line[0], line[1], line[2], line[3]);
-                Pagamentos pagamento = factory.criaPagamentos();
-                pagamentos.add(pagamento);
-            }
+            PagamentosService.alterarListaAtrasado(pagamentos);
+            PagamentosService.alterarListaAdiantado(pagamentos);
 
             pagamentos.stream().forEach(System.out::println);
-            scanner.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    private static void checarArquivo(Path path) {
-        if (Files.exists(path)) {
-            System.out.println("Arquivo encontrado.");
-        } else {
-            System.out.println("Arquivo não encontrado.");
-        }
-
-        System.out.println(path);
     }
 
     private static void exibirArquivo(InputStream is) throws FileNotFoundException {
@@ -70,5 +45,4 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
-
 }
