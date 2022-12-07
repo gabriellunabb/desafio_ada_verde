@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -55,6 +56,7 @@ public class PagamentosDao {
         try {
             BufferedWriter arquivo = new BufferedWriter(new FileWriter(file));
 
+            arquivo.write("Nome;Tipo Pagamento;Data Vencimento;Valor\n");
             for (String string : conteudo) {
                 arquivo.write(string + "\n");
             }
