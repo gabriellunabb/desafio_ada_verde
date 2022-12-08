@@ -23,3 +23,11 @@ Façam um fork deste projeto, que deverá ser feito em grupo, com cada integrant
 Com o projeto concluído, enviem o link para o Class até o dia 7/12.
 
 Boa sorte!
+
+# Integrantes do grupo
+* Gabriel Luna Rosseto
+* Joao Pedro Pinheiro Ghesti
+* Marcos Vinicius Campos
+* Renan Angelo Victal
+* Rodolfo de Lima e Rosa
+* Samuel de Jesus Meireles Martins Filho
