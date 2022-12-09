@@ -68,6 +68,6 @@ public class Pagamentos {
                 .concat(";")
                 .concat(this.dtVencto.toString().replaceAll("-","" ))
                 .concat(";")
-                .concat(String.valueOf(this.valor.doubleValue()));
+                .concat(String.valueOf(BigDecimal.valueOf(this.valor.doubleValue()).setScale(2, BigDecimal.ROUND_HALF_EVEN)));
     }
 }
